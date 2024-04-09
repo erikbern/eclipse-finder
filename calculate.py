@@ -1,3 +1,8 @@
+"""
+Script to plot all eclipses 2020-2040
+
+Run this using `modal run calculate.py` (requires a Modal account)
+"""
 import io
 from datetime import datetime, timedelta, timezone
 
@@ -8,7 +13,6 @@ stub = modal.Stub()
 image = modal.Image.debian_slim().pip_install(
     "scipy",
     "astropy",
-    "async-timeout",
     "jplephem",
     "matplotlib",
     "basemap",
@@ -159,7 +163,7 @@ def plot_eclipse(dt_min: datetime, dt_max: datetime) -> tuple[datetime, bytes]:
 @stub.local_entrypoint()
 def run():
     dt_a = datetime(2020, 1, 1, 0, 0, 0, tzinfo=timezone.utc)
-    dt_b = datetime(2030, 1, 1, 0, 0, 0, tzinfo=timezone.utc)
+    dt_b = datetime(2040, 1, 1, 0, 0, 0, tzinfo=timezone.utc)
 
     # Generate even-hour spaced intervals
     dts = gen_dts(dt_a, dt_b, 3600)
